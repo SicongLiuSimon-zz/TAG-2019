@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		361DAF70B47F3D611A836BEC /* Pods_ev3_mqtt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE7A6B47F84251054E2E625 /* Pods_ev3_mqtt.framework */; };
+		FB199BF122AFFF7E00983A3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB199BF022AFFF7E00983A3C /* AppDelegate.swift */; };
+		FB199BF322AFFF7E00983A3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB199BF222AFFF7E00983A3C /* ViewController.swift */; };
+		FB199BF622AFFF7E00983A3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB199BF422AFFF7E00983A3C /* Main.storyboard */; };
+		FB199BF822AFFF7F00983A3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB199BF722AFFF7F00983A3C /* Assets.xcassets */; };
+		FB199BFB22AFFF7F00983A3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB199BF922AFFF7F00983A3C /* LaunchScreen.storyboard */; };
+		FB56FDB322E23D2D00E8A4E1 /* SpeechUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB56FDB222E23D2D00E8A4E1 /* SpeechUtility.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1B300E3AD3BEACB48CFB874D /* Pods-ev3_mqtt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ev3_mqtt.release.xcconfig"; path = "Target Support Files/Pods-ev3_mqtt/Pods-ev3_mqtt.release.xcconfig"; sourceTree = "<group>"; };
+		9DE7A6B47F84251054E2E625 /* Pods_ev3_mqtt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ev3_mqtt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C18829ABF73E8139350EC565 /* Pods-ev3_mqtt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ev3_mqtt.debug.xcconfig"; path = "Target Support Files/Pods-ev3_mqtt/Pods-ev3_mqtt.debug.xcconfig"; sourceTree = "<group>"; };
+		FB199BED22AFFF7E00983A3C /* ev3_mqtt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ev3_mqtt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB199BF022AFFF7E00983A3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FB199BF222AFFF7E00983A3C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FB199BF522AFFF7E00983A3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FB199BF722AFFF7F00983A3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FB199BFA22AFFF7F00983A3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FB199BFC22AFFF7F00983A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB56FDB222E23D2D00E8A4E1 /* SpeechUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpeechUtility.swift; path = "../../../../Google Drive/Personal Projects/SiteSeer-EG1003/SiteSeer-EG1003/SpeechUtility.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB199BEA22AFFF7E00983A3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				361DAF70B47F3D611A836BEC /* Pods_ev3_mqtt.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0638E554930F0D089E5D7F7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C18829ABF73E8139350EC565 /* Pods-ev3_mqtt.debug.xcconfig */,
+				1B300E3AD3BEACB48CFB874D /* Pods-ev3_mqtt.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F83201C2034F84D4E2D62498 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DE7A6B47F84251054E2E625 /* Pods_ev3_mqtt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB199BE422AFFF7E00983A3C = {
+			isa = PBXGroup;
+			children = (
+				FB199BEF22AFFF7E00983A3C /* ev3_mqtt */,
+				FB199BEE22AFFF7E00983A3C /* Products */,
+				0638E554930F0D089E5D7F7C /* Pods */,
+				F83201C2034F84D4E2D62498 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FB199BEE22AFFF7E00983A3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB199BED22AFFF7E00983A3C /* ev3_mqtt.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB199BEF22AFFF7E00983A3C /* ev3_mqtt */ = {
+			isa = PBXGroup;
+			children = (
+				FB199BF022AFFF7E00983A3C /* AppDelegate.swift */,
+				FB199BF222AFFF7E00983A3C /* ViewController.swift */,
+				FB199BF422AFFF7E00983A3C /* Main.storyboard */,
+				FB56FDB222E23D2D00E8A4E1 /* SpeechUtility.swift */,
+				FB199BF722AFFF7F00983A3C /* Assets.xcassets */,
+				FB199BF922AFFF7F00983A3C /* LaunchScreen.storyboard */,
+				FB199BFC22AFFF7F00983A3C /* Info.plist */,
+			);
+			path = ev3_mqtt;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB199BEC22AFFF7E00983A3C /* ev3_mqtt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB199BFF22AFFF7F00983A3C /* Build configuration list for PBXNativeTarget "ev3_mqtt" */;
+			buildPhases = (
+				96A00AC33FC15201BE1F4913 /* [CP] Check Pods Manifest.lock */,
+				FB199BE922AFFF7E00983A3C /* Sources */,
+				FB199BEA22AFFF7E00983A3C /* Frameworks */,
+				FB199BEB22AFFF7E00983A3C /* Resources */,
+				CEB57992A31022899BCC0C76 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ev3_mqtt;
+			productName = ev3_mqtt;
+			productReference = FB199BED22AFFF7E00983A3C /* ev3_mqtt.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB199BE522AFFF7E00983A3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "New York University";
+				TargetAttributes = {
+					FB199BEC22AFFF7E00983A3C = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = FB199BE822AFFF7E00983A3C /* Build configuration list for PBXProject "ev3_mqtt" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FB199BE422AFFF7E00983A3C;
+			productRefGroup = FB199BEE22AFFF7E00983A3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB199BEC22AFFF7E00983A3C /* ev3_mqtt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB199BEB22AFFF7E00983A3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB199BFB22AFFF7F00983A3C /* LaunchScreen.storyboard in Resources */,
+				FB199BF822AFFF7F00983A3C /* Assets.xcassets in Resources */,
+				FB199BF622AFFF7E00983A3C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		96A00AC33FC15201BE1F4913 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ev3_mqtt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CEB57992A31022899BCC0C76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ev3_mqtt/Pods-ev3_mqtt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ev3_mqtt/Pods-ev3_mqtt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB199BE922AFFF7E00983A3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB56FDB322E23D2D00E8A4E1 /* SpeechUtility.swift in Sources */,
+				FB199BF322AFFF7E00983A3C /* ViewController.swift in Sources */,
+				FB199BF122AFFF7E00983A3C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FB199BF422AFFF7E00983A3C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB199BF522AFFF7E00983A3C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FB199BF922AFFF7F00983A3C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB199BFA22AFFF7F00983A3C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FB199BFD22AFFF7F00983A3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FB199BFE22AFFF7F00983A3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FB199C0022AFFF7F00983A3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C18829ABF73E8139350EC565 /* Pods-ev3_mqtt.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VAM3A58Y83;
+				INFOPLIST_FILE = ev3_mqtt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.nyu.cs.kc3585.ev3-mqtt";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FB199C0122AFFF7F00983A3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B300E3AD3BEACB48CFB874D /* Pods-ev3_mqtt.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VAM3A58Y83;
+				INFOPLIST_FILE = ev3_mqtt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.nyu.cs.kc3585.ev3-mqtt";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB199BE822AFFF7E00983A3C /* Build configuration list for PBXProject "ev3_mqtt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB199BFD22AFFF7F00983A3C /* Debug */,
+				FB199BFE22AFFF7F00983A3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB199BFF22AFFF7F00983A3C /* Build configuration list for PBXNativeTarget "ev3_mqtt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB199C0022AFFF7F00983A3C /* Debug */,
+				FB199C0122AFFF7F00983A3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB199BE522AFFF7E00983A3C /* Project object */;
+}
