@@ -70,5 +70,6 @@ def commands(self):
 ```
 This function sends commands to the robot to do different tasks
 
-## Support
+## Poster
+<img src="TAG Poster.png" width=1000><br>
 
