@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import time
 import math
 from threading import Thread
-import queue
+# import queue
 
 class Tag:
     def __init__(self):
@@ -19,9 +19,11 @@ class Tag:
         self.function_table["Draw"] = self._draw
         self.function_table["Position"] = self._getposition
 
-        self.queue = queue.Queue()
+        # self.queue = queue.Queue()
+        # self.queue.put("Initial Test")
+        self.queue_list = [ ]
 
-        self.fast_movement = "MoveTank 70 70"
+        self.fast_movement = "MoveTank 100 100"
         self.fast_reverse_movement = "MoveTank -70 -70"
         self.slow_movement = "MoveTank 30 30"
         self.slow_reverse_movement = "MoveTank -30 -30"
@@ -41,8 +43,7 @@ class Tag:
         self.client.username_pw_set("nyu", "nyu")
         self.client.connect("192.168.1.102", 1883, 60)
 
-        # Next Steps: CoreLink
-        # To Do: Go to position using iPad and Speech to Text, Draw Shapes, Queue
+        # To Do:
 
     def __del__(self):
         self.client.disconnect()
@@ -59,13 +60,15 @@ class Tag:
         action = data[:split]
         param = data[split + 1:]
         if action != "Position":
-            self.queue.enqueue(self.function_table[action](param))
+            # self.queue.enqueue(self.function_table[action](param))
+            self.queue_list.append(data)
         else:
             self.function_table[action](param)
-    def receiveRigidBodyFrame(self, pos, orient):
+    def receiveRigidBodyFrame(self, id, pos, orient):
         # Update Values
-        self.position = pos
-        self.orientation = orient
+        if id == 1:
+            self.position = pos
+            self.orientation = orient
 
         # To not publish too many to mqtt
         if datetime.now() < self.time:
@@ -75,11 +78,16 @@ class Tag:
             print("PUT ME DOWN!!!!!!!")
             self.client.publish("tag/iostest", "Say Put Me Down")
             self.time = datetime.now() + timedelta(seconds=3)
-        else:
-            print("Position      X:", self.position[2], ", Y:", self.position[0], ", Height:", self.position[1])
-            print("Orientation  ", self.orientation)
-            print()
-            self.time = datetime.now() + timedelta(seconds=2)
+        # else:
+        #     # print("Queue", self.queue_list)
+        #     if id == 1:
+        #         print(id, "Robot")
+        #     else:
+        #         print(id, "Toy")
+        #     print("Position      X:", pos[2], ", Y:", pos[0], ", Height:", pos[1])
+        #     print("Orientation  ", orient)
+        #     print()
+        #     # self.time = datetime.now() + timedelta(seconds=2)
 
     # IOS Integration for Function Table Subscribing
     def _getposition(self, val):
@@ -95,19 +103,17 @@ class Tag:
             speech += str(round(abs(self.position[0])))
         self.client.publish("tag/iosspeak", speech)
     def _draw(self, val):
-        self.client.publish("tag/iosspeak", "HEEEEEIIII")
         if val == "Square":
             print("SQUARE")
-            self.draw_square(1)
+            self.draw_sdquare(2)
         elif val == "Triangle":
             print("Triangle")
-            self.draw_equil_triangle(1)
+            self.draw_equil_triangle(2)
         elif val == "Circle":
             print("Circle")
-            self.draw_circle(1)
-        self.queue.dequeue()
+            self.draw_circle(2)
+        del self.queue_list[0]
     def _turn(self, val):
-        self.client.publish("tag/iosspeak", "HEEEEEEA")
         if val == "Left":
             if self.ideal_orientation + 90 > 360:
                 self.turn(90)
@@ -118,48 +124,50 @@ class Tag:
                 self.turn(270)
             else:
                 self.turn(self.ideal_orientation - 90)
-        self.queue.dequeue()
+        del self.queue_list[0]
     def _move(self, val):
-        self.client.publish("tag/iosspeak", "HELLO")
         if val == "Up":
             self.move(1)
         elif val == "Down":
             self.move(-1)
-        self.queue.dequeue()
+        del self.queue_list[0]
 
     # Turning and Moving Methods
     def turn(self, goal):
-        print("Turning to", goal, "degrees")
+        #cap goal between 0 and 360
+        goal = goal % 360
+        # print("Turning to", goal, "degrees")
         self.ideal_orientation = goal
-        # Find out whether to turn left or right based on closest
-        diff = abs(goal - self.orientation)
+        #ranges from -360 to 360
+        diff = goal - self.orientation
 
-        right = False # False if 0 degrees is right
-        if diff < 180:
-            if goal < self.orientation:
-                right = not right
-        elif diff > 180:
-            if goal > self.orientation:
-                right = not right
+        right = True
+        if 0 <= diff <= 180 or -360 <= diff <= -180:
+            right=False
 
-        left_bound = goal - 2
-        right_bound = goal + 2
+        left_bound = goal - 3
+        right_bound = goal + 3
+        #does this turn need to wrap around the 360/0 degree mark
+        wrap = False
         if goal - 2 < 0:
-            left_bound = 360 + left_bound
+            wrap = True
+            left_bound += 360
         elif goal + 2 > 360:
-            right_bound = right_bound - 360
+            wrap = True
+            right_bound += -360
 
         if right:
-            self.client.publish("tag/networktest", self.slow_right_turn)
+            self.client.publish("tag/networktest", self.fast_right_turn)
         else:
-            self.client.publish("tag/networktest", self.slow_left_turn)
+            self.client.publish("tag/networktest", self.fast_left_turn)
 
         while True:
-            if goal - 2 < 0 or goal + 2 > 360:
+            if wrap:
                 if (left_bound <= self.orientation <= 360) or (0 <= self.orientation <= right_bound):
                     self.client.publish("tag/networktest", self.stop_movement)
                     break
             elif left_bound <= self.orientation <= right_bound:
+                print(left_bound, self.orientation, right_bound)
                 self.client.publish("tag/networktest", self.stop_movement)
                 break
     def move(self, length):
@@ -177,10 +185,8 @@ class Tag:
 
         if length > 0:
             self.client.publish("tag/networktest", self.slow_movement)
-            self.client.publish("tag/iosspeak", "HELLO")
         else:
             self.client.publish("tag/networktest", self.slow_reverse_movement)
-            self.client.publish("tag/iosspeak", "HELLO")
 
         while True:
             if left_bound_x <= self.position[2] <= right_bound_x and left_bound_y <= self.position[0] <= right_bound_y:
@@ -228,36 +234,45 @@ class Tag:
         self.turn(180)
         self.move(length)
         # Say Area
-        self.client.publish("tag/iosspeak", "Speak The area of the triangle is {}".format(area))
+        self.client.publish("tag/iosspeak", "The area of the triangle is {}".format(area))
     def draw_circle(self, radius):
         pass
 
     # Coordinate Grid Methods: Moving To Point using X/Y or Straight There
     def moveTo(self, goal, error):
         var = (goal[0] - self.position[2], goal[1] - self.position[0])
-        mag = math.sqrt((var[0])**2 + (var[1])**2)
-        angle = math.atan2(var[1], var[0]) * 180 / math.pi
-        diff = angle - self.orientation
+        mag = math.sqrt((var[0]) ** 2 + (var[1]) ** 2)
+        if mag < error:
+            self.client.publish("tag/networktest", self.stop_movement)
+            return
 
-        a = abs((math.atan((goal[1] - self.position[0]) / (goal[0] - self.position[2])) * 180 / math.pi))
-        if goal[0] > self.position[2]:  # right
-            if goal[1] > self.position[0]:  # up
-                angle = 90 - a
-            else:  # down
-                angle = 90 + a
-        else:  # left
-            if goal[1] > self.position[0]:  # up
-                angle = 270 + a
-            else:  # down
-                angle = 270 - a
+        self.client.publish("tag/networktest", self.fast_movement)
 
-        print(angle)
+        while True:
+            var = (goal[0] - self.position[2], goal[1] - self.position[0])
+            mag = math.sqrt((var[0])**2 + (var[1])**2)
+            if mag<error:
+                self.client.publish("tag/networktest", self.stop_movement)
+                return
 
+            angle = math.atan2(var[1], var[0])
+            diffa = angle * 180 / math.pi - self.orientation
+            diffr = angle - (self.orientation/180.0*math.pi)
+
+            c = math.cos(diffr)
+            s = math.sin(diffr)
+
+            if c<0 or abs(mag*s)>error:
+                # print(diffa+self.orientation)
+                self.turn(diffa+self.orientation)
+                self.client.publish("tag/networktest", self.fast_movement)
+                # print(mag / 10)
+                time.sleep(mag / 10)
+
+        """
         self.turn(angle)
 
         # self.client.publish("tag/networktest", self.slow_movement)
-
-        print("HIIIIIIIIIIIII")
 
         while True:
             left_bound_x = goal[0] - 0.05
@@ -289,6 +304,7 @@ class Tag:
             else:
                 print(4)
                 continue
+            """
     def straight_to(self, goal):
         # robot moves straight to coordinate point
         a = abs((math.atan((goal[1] - self.position[0]) / (goal[0] - self.position[2])) * 180 / math.pi))
@@ -355,7 +371,7 @@ class Tag:
             if left_bound <= self.position[0] <= right_bound:
                 self.client.publish("tag/networktest", self.stop_movement)
                 break
-        self.turn(90)
+        # self.turn(90)
 
     # MQTT separate thread because loop forever has issues after calling that method
     def mqtt_setup(self):
@@ -367,13 +383,21 @@ class Tag:
     def commands(self):
         self.client.publish("tag/networktest", self.stop_movement)
         time.sleep(0.5)
-        # self.move(1)
-        # self.turn(330)
 
-        # self.straight_to((-1, -3))
+        # self.turn(179)
+
+        # self.moveTo((-4,-4), 0.5)
+
+        # self.move(1)
+        #self.turn(10)
+
+        #self.straight_to((-1, -3))
         # self.move_to_x(-3)
         # self.move_to_y(-3)
-        # self.moveTo((1,-1), 0.5)
+
+        while True:
+            self.moveTo((-5,-3), 0.2)
+            self.moveTo((4,4), 0.2)
 
         # self.move_to((2, -2))
         # self.turn(90)
@@ -388,8 +412,15 @@ class Tag:
 
         # self.draw_equil_triangle(2)
         # self.draw_square(3)
-        while True:
-            print(self.queue.get())
+
+        # iOS Infinite Loop
+        # while True:
+        #     if self.queue_list:
+        #         data = self.queue_list[0]
+        #         split = data.find(' ')
+        #         action = data[:split]
+        #         param = data[split + 1:]
+        #         self.function_table[action](param)
 
     def run(self):
         m = Thread(target = self.mqtt_setup)

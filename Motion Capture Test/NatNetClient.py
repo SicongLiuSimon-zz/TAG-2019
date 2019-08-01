@@ -97,6 +97,8 @@ class NatNetClient:
 
     # Quaternion Conversion Functions
     def quaternion_to_axis_angle(self, q):
+        if q[3] == 1:
+            return 0
         mul = 1.0 / math.sqrt(1 - q[3] * q[3])
         return [q[0] * mul, q[1] * mul, q[2] * mul, math.acos(q[3]) * 2.0]
 
@@ -170,7 +172,7 @@ class NatNetClient:
 
         # Send information to any listener.
         if self.rigidBodyListener is not None:
-            self.rigidBodyListener(position, orientation)
+            self.rigidBodyListener(id, position, orientation)
 
         # Marker positions
         for i in markerCountRange:
