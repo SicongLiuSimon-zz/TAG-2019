@@ -1,74 +1,46 @@
-# Tag 2019
+# TAG
 
-## Installation
-```bash
-pip install paho-mqtt
-```
-or 
+<img src="tag-2019.png" width=1000><br>
 
-follow [Install MQTT](https://www.ev3dev.org/docs/tutorials/sending-and-receiving-messages-with-mqtt/)
-to set up MQTT
+## Information
+  * Various Aspects of TAG:
+    * EV3 Robot
+    * MQTT Server
+    * iOS App
+    * OptiTrack, Motive Software, NatNet SDK
+  * Important Folders:
+    * Motion Capture Test
+      * One File: stream_from_optitrack.py (steams data from OptiTrack to MQTT: tag/optitrack_data)
+    * iOS TAG Project
+      * iOS App: has user interface and commands to EV3 Robot through MQTT (tag/networktest)
+  * App Design
+    * Up, Down, Left, Right Arrow Keys: moving & turning
+    * EV3 Robot Button: say current robot position & stop current robot action
+    * Slider: adjust for moving length and shape length
+    * Shapes: Draw each Shapes
+    * Grid: Tap to command robot to move to tapped coordinate point
+  * OptiTrack Structure
+    * Two Rigid Bodies:
+      * 1: EV3 Robot
+      * 2: Activity "Toy" to create interactive learning
+    * Orientation
+      * 0 degrees is positive x-axis
+      * 90 degrees is positive y-axis
+      * 180 degrees is negative x-axis
+      * 270 degrees is negative y-axis
+  * Code Structure
+    * Loop: OptiTrack -> MQTT -> iOS App -> EV3 Robot
+    * Threads:
+      * OptiTrack: Streaming data from Motive to MQTT (tag/optitrack_data)
+      * Action: iOS App sends commands to EV3 Robot through MQTT (tag/networktest)
+    * Actions are performed in a queue sequence. When the user presses on a button, the function is put on a queue, waiting for the previous function to finish before it is called. Two Queues: 1 function, 1 parameters
+      * Queue Format, example: Function [1, 3, 1, 2] & Parameters [90, 4, (4,3), 270, 1]
+        * Function: 1-Move, 2-Turn, 3-moveTo, 4-draw_square, 5-draw_triangle
+        * Parameters: Int(length), Double(orientation), Tuple(coordinate pair)
 
-## Robot functions
-subscribe.py receives commands from the MQTT server
-```python
-def on_connect(client, userdata, flags, rc):
-    global logger
-    print("Connected with result code " + str(rc))
-    client.subscribe("tag/networktest")
-```
-connect to the server
-
-Funcs_Table.py stores a dictionary of functions used in subscribe.py
-
-danger.wav and chime1.wav are sound files
-
-## Motion Capture
-NatNetClient.py is OptiTrack's own script that receive data from the motion capture
-
-```python
-def quaternion_to_axis_angle(self, q):
-    mul = 1.0 / math.sqrt(1 - q[3] * q[3])
-    return [q[0] * mul, q[1] * mul, q[2] * mul, math.acos(q[3]) * 2.0]
-
-def axis_angle_to_matrix(self, aa):
-    c = math.cos(aa[3])
-    s = math.sin(aa[3])
-    t = 1 - c
-    return [[t * aa[0] * aa[0] + c, t * aa[0] * aa[1] - aa[2] * s, t * aa[0] * aa[2] + aa[1] * s],
-            [t * aa[0] * aa[1] + aa[2] * s, t * aa[1] * aa[1] + c, t * aa[1] * aa[2] - aa[0] * s],
-            [t * aa[0] * aa[2] - aa[1] * s, t * aa[1] * aa[2] + aa[0] * s, t * aa[2] * aa[2] + c]]
-
-def quarternion_to_matrix(self, q):
-    return self.axis_angle_to_matrix(self.quaternion_to_axis_angle(q))
-
-def lazy_angle(self, q):
-    mat = self.quarternion_to_matrix(q)
-    x_vec = [mat[0][0], mat[1][0], mat[2][0]]
-    if mat[1][1] < 0:
-        x_vec[0] *= -1
-        x_vec[1] *= -1
-        x_vec[2] *= -1
-    return math.atan2(x_vec[0], x_vec[2])
-```
-These functions aim to transform quaternion to angle to get orientation of the robot
-
-tag_project.py is the main script controlling the robot to do tasks
-Tasks include accurate turning, forwarding and moving to certain coordinate
-
-
-```python
-def commands(self):
-    self.client.publish("tag/networktest", "MoveTank 0 0")
-    time.sleep(1)
-    while True:
-        # self.turn(0)
-        # self.move_to( (1, 1) )
-        # self.straight_to((-4, -4))
-        # self.moveTo((1,1), 0.5)
-        break
-```
-This function sends commands to the robot to do different tasks
-
-## Support
-
+## From Scratch
+1. Clone this repository to laptop and OptiTrack Desktop
+2. Sideload iOS app (iOS TAG Project folder) onto iPad through Xcode
+3. Load MQTT Test folder onto EV3 robot through VSC (https://sites.google.com/site/ev3devpython/setting-up-vs-code)
+4. Run stream_from_optitrack.py on the OptiTrack Desktop
+5. Run iOS app on iPad
